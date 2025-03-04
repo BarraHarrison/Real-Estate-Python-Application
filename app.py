@@ -53,5 +53,25 @@ def index():
         map = folium.Map(location=map_center, zoom_start=12)
 
         marker_cluster = MarkerCluster().add_to(map)
+
         for idx, row in data_frame.iterrows():
-            pass
+            price = data_frame["price"]
+            address = data_frame["address"]
+            bedrooms = data_frame["bedrooms"]
+            bathrooms = data_frame["bathrooms"]
+            living_area = data_frame["livingArea"]
+            gross_yield = data_frame["gross_rental_yield"]
+            zestimate = data_frame["zestimate"]
+            rent_zestimate = data_frame["rentZestimate"]
+            property_url = data_frame["url"]
+            zpid = data_frame["zpid"]
+
+            if not pd.isna(price):
+                price_formatted = f"${price:.2f}"
+            else:
+                price_formatted = "N/A"
+
+            if not pd.isna(zestimate):
+                zestimate_formatted = f"${zestimate:.2f}"
+            else:
+                zestimate_formatted = "N/A"
