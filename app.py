@@ -112,6 +112,15 @@ def index():
                 function showLoadingAndRedirect(idx, zpid) {{
                     document.getElementById("button-" + idx).style.display = "none";
                     document.getElementById("loading-" + idx).style.display = "block";
+                    window.location.href = "http://localhost:5000/price_history" + zpid;
                 }}
             </script>
             """
+
+            color = get_marker_color(row["gross_rental_yield"], row["isOffMarket"])
+
+            folium.Marker(
+                location=[row["latitude"], row["longitude"]],
+                popup=folium.Popup(folium.IFrame(popup_text, width=300, height=250)),
+                icon=folium.Icon(color=color, icon="home", prefix="fa")
+            ).add_to(marker_cluster)
