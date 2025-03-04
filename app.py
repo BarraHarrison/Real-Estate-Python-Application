@@ -46,6 +46,16 @@ def format_value(value, prefix="$", decimals=2):
         return "N/A"
     return f"{prefix}{value:.{decimals}f}"
 
+@app.route("/")
+def index():
+    if os.path.exists("templates/property_map.html"):
+        return render_template("property_map.html")
+    
+    map_center = [data_frame["latitude"].mean(), data_frame["longitude"].mean()]
+    map_ = folium.Map(location=map_center, zoom_start=12)
+    marker_cluster = MarkerCluster().add_to(map_)
+
+
 @app.route("/price_history/<int:zpid>")
 @cache
 def price_history(zpid):
