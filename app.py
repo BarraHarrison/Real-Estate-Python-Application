@@ -54,16 +54,16 @@ def index():
         marker_cluster = MarkerCluster().add_to(map)
 
         for idx, row in data_frame.iterrows():
-            price = data_frame["price"]
-            address = data_frame["address"]
-            bedrooms = data_frame["bedrooms"]
-            bathrooms = data_frame["bathrooms"]
-            living_area = data_frame["livingArea"]
-            gross_yield = data_frame["gross_rental_yield"]
-            zestimate = data_frame["zestimate"]
-            rent_zestimate = data_frame["rentZestimate"]
-            property_url = data_frame["url"]
-            zpid = data_frame["zpid"]
+            price = row["price"]
+            address = row["address"]
+            bedrooms = row["bedrooms"]
+            bathrooms = row["bathrooms"]
+            living_area = row["livingArea"]
+            gross_yield = row["gross_rental_yield"]
+            zestimate = row["zestimate"]
+            rent_zestimate = row["rentZestimate"]
+            property_url = row["url"]
+            zpid = row["zpid"]
 
             if not pd.isna(price):
                 price_formatted = f"${price:.2f}"
