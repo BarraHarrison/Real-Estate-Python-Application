@@ -145,6 +145,9 @@ def price_history(zpid):
 
     price_history_df = pd.read_csv(temp_file, usecols=["date", "price"])
     price_history_df["date"] = pd.to_datetime(price_history_df["date"]).dt.strftime("%Y-%m-%d")
+
+    return render_template("price_history.html", price_history_data_frame=price_history_df)
+
     
 
 if __name__ == "__main__":
