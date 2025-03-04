@@ -75,3 +75,17 @@ def index():
                 zestimate_formatted = f"${zestimate:.2f}"
             else:
                 zestimate_formatted = "N/A"
+
+            if not pd.isna(rent_zestimate):
+                rent_zestimate_formatted = f"${rent_zestimate:.2f}"
+            else:
+                rent_zestimate_formatted = "N/A"
+
+            if not pd.isna(gross_yield):
+                gross_yield_formatted = f"${gross_yield:.2f}"
+            else:
+                gross_yield_formatted = "N/A"
+
+            bedrooms =int(bedrooms) if not pd.isna(bedrooms) else "N/A"
+            bathrooms =int(bathrooms) if not pd.isna(bathrooms) else "N/A"
+            living_area =int(living_area) if not pd.isna(living_area) else "N/A"
