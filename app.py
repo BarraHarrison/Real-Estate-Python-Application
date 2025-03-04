@@ -111,7 +111,21 @@ def index():
 @app.route("/price_history/<int:zpid>")
 @cache
 def price_history(zpid):
-    pass
+    try:
+        url = data_frame.loc[data_frame["zpid"] == zpid, "url"].values[0]
+    except IndexError:
+        return "Property not found"
+    
+    TOKEN = open("TOKEN.txt").read().strip()
+    api_url = "https://brightdata.com/cp/datasets/browse/gd_lfqkr8wm13ixtbd8f5?id=hl_5681f148"
+
+    headers = {"Authorization": f"Bearer {TOKEN}", "Content-Type": "application/json"}
+    response = requests.post(api_url, headers=headers, json=[{"url": url}])
+
+    try:
+        snapshot_id = response.json()["snapshot_id"]
+    except KeyError:
+        return "Failed to retrieve snapshot ID"
 
 if __name__ == "__main__":
     app.run(debug=True)
