@@ -69,6 +69,34 @@ def index():
         except (json.JSONDecodeError, KeyError, TypeError):
             street_address = "Unknown Address"
 
+        property_url = row["url"]
+        zpid = row["zpid"]
+
+        
+        popup_text = f"""
+        <b>Address:</b> {street_address}<br>
+        <b>Price:</b> {price}<br>
+        <b>Bedrooms:</b> {bedrooms}<br>
+        <b>Bathrooms:</b> {bathrooms}<br>
+        <b>Living Area:</b> {living_area}<br>
+        <b>Gross Rental Yield:</b> {gross_yield}<br>
+        <b>Zestimate:</b> {zestimate}<br>
+        <b>Rent Zestimate:</b> {rent_zestimate}<br>
+        <a href="{property_url}" target="_blank">Zillow Link</a><br>
+        <button id="button-{zpid}" onclick="showLoadingAndRedirect({zpid})">Show Price History</button>
+        <div id="loading-{zpid}" style="display: none;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Gray_circles_rotate.gif" alt="loading..." width="50" height="50">
+        </div>
+
+        <script>
+            function showLoadingAndRedirect(zpid) {{
+                document.getElementById("button-" + zpid).style.display = "none";
+                document.getElementById("loading-" + zpid).style.display = "block";
+                window.location.href = "/price_history/" + zpid;
+            }}
+        </script>
+        """
+
 
 @app.route("/price_history/<int:zpid>")
 @cache
