@@ -41,8 +41,10 @@ def get_marker_color(gross_yield, off_market):
         return "orange"
     return "green"
 
-def format_value():
-    pass
+def format_value(value, prefix="$", decimals=2):
+    if pd.isna(value):
+        return "N/A"
+    return f"{prefix}{value:.{decimals}f}"
 
 @app.route("/price_history/<int:zpid>")
 @cache
