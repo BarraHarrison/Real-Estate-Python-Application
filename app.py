@@ -89,3 +89,29 @@ def index():
             bedrooms =int(bedrooms) if not pd.isna(bedrooms) else "N/A"
             bathrooms =int(bathrooms) if not pd.isna(bathrooms) else "N/A"
             living_area =int(living_area) if not pd.isna(living_area) else "N/A"
+
+            address_dict = json.loads(address)
+            street_address = address_dict["streetAddress"]
+
+            popup_text = f"""
+            <b>Address:</b> {street_address}<br>
+            <b>Price:</b> {price_formatted}<br>
+            <b>Bedrooms:</b> {bedrooms}<br>
+            <b>Bathrooms:</b> {bathrooms}<br>
+            <b>Living Area:</b> {living_area}<br>
+            <b>Gross Rental Yield:</b> {gross_yield_formatted}<br>
+            <b>Zestimate:</b> {zestimate_formatted}<br>
+            <b>Rent Zestimate:</b> {rent_zestimate_formatted}<br>
+            <a href="{property_url}" target="_blank">Zillow Link</a><br>
+            <button id="button-{idx}" onclick="showLoadingAndRedirecting({idx}, '{zpid}')">Show Price History</button>
+            <div id="loading-{idx}" style="display: none;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Gray_circles_rotate.gif" alt="loading..." width="50" height="50">
+            </div>
+
+            <script>
+                function showLoadingAndRedirect(idx, zpid) {{
+                    document.getElementById("button-" + idx).style.display = "none";
+                    document.getElementById("loading-" + idx).style.display = "block";
+                }}
+            </script>
+            """
