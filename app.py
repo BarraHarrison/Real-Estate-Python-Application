@@ -139,6 +139,12 @@ def price_history(zpid):
         if "Snapshot is empty" in response.text:
             return "No historic data"
         
+    temp_file = "temp.csv"
+    with open(temp_file, "wb") as f:
+        f.write(response.content)
+
+    price_history_df = pd.read_csv(temp_file, usecols=["date", "price"])
+    price_history_df["date"] = pd.to_datetime(price_history_df["date"]).dt.strftime("%Y-%m-%d")
     
 
 if __name__ == "__main__":
