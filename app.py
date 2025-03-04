@@ -111,49 +111,7 @@ def index():
 @app.route("/price_history/<int:zpid>")
 @cache
 def price_history(zpid):
-    url = data_frame[data_frame.zpid == zpid].url.values[0]
-    api_url = "https://brightdata.com/cp/datasets/browse/gd_lfqkr8wm13ixtbd8f5?id=hl_5681f148"
-
-    TOKEN = open("TOKEN.txt", "r").read()
-
-    headers = {
-        "Authorization": f"Bearer {TOKEN}",
-        "Content-Type": "application/json"
-    }
-
-    data = [{"url": url}]
-
-    response = requests.post(api_url, headers=headers, json=data)
-    snapshot_id = response.json()["snapshot_id"]
-
-    time.sleep(5)
-
-    api_url = f"https://brightdata.com/cp/datasets/browse/snapshot/{snapshot_id}?format=csv"
-
-    headers = {
-        "Authorization": f"Bearer {TOKEN}"
-    }
-
-    response = requests.get(api_url, headers=headers)
-
-    if "Snapshot is empty" in response.text:
-        return "No historic data"
-    
-    while "Snapshot is not ready yet, try again in 10s" in response.text:
-        time.sleep(10)
-        response = requests.get(api_url, headers=headers)
-        if "Snapshot is empty" in response.text:
-            return "No historic data"
-        
-    with open("temp.csv", "wb") as f:
-        f.write(response.content)
-
-    price_history_data_frame = pd.read_csv("temp.csv")
-    price_history_data_frame = price_history_data_frame[["date", "price"]]
-    price_history_data_frame["date"] = pd.to_datetime(price_history_data_frame["date"])
-    price_history_data_frame["date"] = price_history_data_frame["date"].dt.strftime("%Y-%m-%d")
-
-    return render_template("price_history.html", price_history_data_frame=price_history_data_frame)
+    pass
 
 if __name__ == "__main__":
     app.run(debug=True)
