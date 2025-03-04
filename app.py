@@ -64,6 +64,11 @@ def index():
         bathrooms = int(row["bathrooms"]) if not pd.isna(row["bathrooms"]) else "N/A"
         living_area = int(row["livingArea"]) if not pd.isna(row["livingArea"]) else "N/A"
 
+        try:
+            street_address = json.loads(row["address"])["streetAddress"]
+        except (json.JSONDecodeError, KeyError, TypeError):
+            street_address = "Unknown Address"
+
 
 @app.route("/price_history/<int:zpid>")
 @cache
