@@ -127,3 +127,26 @@ def index():
 
         map.save("templates/property_map.html")
         return render_template("property_map.html")
+    
+
+@app.route("/price_history/<int:zpid>")
+@cache
+def price_history(zpid):
+    url = data_frame[data_frame.zpid == zpid].url.values[0]
+    api_url = "https://brightdata.com/cp/datasets/browse/gd_lfqkr8wm13ixtbd8f5?id=hl_5681f148"
+
+    TOKEN = open("TOKEN.txt", "r").read()
+
+    headers = {
+        "Authorization": f"Bearer {TOKEN}",
+        "Content-Type": "application/json"
+    }
+
+    data = [{"url": url}]
+
+    response = requests.post(api_url, headers=headers, json=data)
+    snapshot_id = response.json()["snapshot_id"]
+
+    time.sleep(5)
+
+    api_url = f"https://brightdata.com/cp/datasets/browse/snapshot/{snapshot_id}?format=csv"
