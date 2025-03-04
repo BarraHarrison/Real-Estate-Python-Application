@@ -150,3 +150,31 @@ def price_history(zpid):
     time.sleep(5)
 
     api_url = f"https://brightdata.com/cp/datasets/browse/snapshot/{snapshot_id}?format=csv"
+
+    headers = {
+        "Authorization": f"Bearer {TOKEN}"
+    }
+
+    response = requests.get(api_url, headers=headers)
+
+    if "Snapshot is empty" in response.text:
+        return "No historic data"
+    
+    while "Snapshot is not ready yet, try again in 10s" in response.text:
+        time.sleep(10)
+        response = requests.get(api_url, headers=headers)
+        if "Snapshot is empty" in response.text:
+            return "No historic data"
+        
+    with open("temp.csv", "wb") as f:
+        f.write(response.content)
+
+    price_history_data_frame = pd.read_csv("temp.csv")
+    price_history_data_frame = price_history_data_frame[["date", "price"]]
+    price_history_data_frame["date"] = pd.to_datetime(price_history_data_frame["date"])
+    price_history_data_frame["date"] = price_history_data_frame["date"].dt.strftime("%Y-%m-%d")
+
+    return render_template("price_history.html", price_history_data_frame=price_history_data_frame)
+
+if __name__ == "__main__":
+    app.run(debug=True)
