@@ -97,6 +97,16 @@ def index():
         </script>
         """
 
+        color = get_marker_color(row["gross_rental_yield"], row["isOffMarket"])
+        folium.Marker(
+            location=[row["latitude"], row["longitude"]],
+            popup=folium.Popup(folium.IFrame(popup_text, width=300, height=250)),
+            icon=folium.Icon(color=color, icon="home", prefix="fa")
+        ).add_to(marker_cluster)
+
+    map_.save("templates/property_map.html")
+    return render_template("property_map.html")
+
 
 @app.route("/price_history/<int:zpid>")
 @cache
