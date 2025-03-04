@@ -15,10 +15,20 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-data_frame = pd.read_csv("Zillow-Property-Listing-Info.csv")
+def load_and_preprocess_data(file_path="Zillow-Property-Listing-Info.csv"):
+    df = pd.read_csv(file_path)
+    df = df.dropna(subset=["longitude", "latitude"])
 
-def load_and_preprocess_data():
-    pass
+    for col in ["rentZestimate", "zestimate", "price"]:
+        df[col] = pd.to_numeric(df[col], errors="coerce")
+
+    df["annual_rent"] = df["rentZestimate"] * 12
+    df["gross_rental_yield"] = (df["annual_rent"] / df["zestimate"]) * 100
+    df["gross_rental_yield"].replace([np.inf, -np.inf], np.nan, inplace=True)
+
+    return df
+
+data_frame = load_and_preprocess_data()
 
 def get_marker_color():
     pass
