@@ -2,3 +2,4 @@ venv/
 .DS_Store
 Zillow-Property-Listing-Info.csv
 .ipynb_checkpoints/
+TOKEN.txt
