@@ -126,6 +126,20 @@ def price_history(zpid):
         snapshot_id = response.json()["snapshot_id"]
     except KeyError:
         return "Failed to retrieve snapshot ID"
+    
+    time.sleep(5)
+    snapshort_url = f"https://brightdata.com/cp/datasets/browse/snapshot/{snapshot_id}?format=csv"
+
+    headers = {"Authorization": f"Bearer {TOKEN}"}
+    response = requests.get(snapshort_url, headers=headers)
+
+    while "Snapshot is not ready yet" in response.text:
+        time.sleep(10)
+        response = requests.get(snapshort_url, headers=headers)
+        if "Snapshot is empty" in response.text:
+            return "No historic data"
+        
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
