@@ -55,6 +55,15 @@ def index():
     map_ = folium.Map(location=map_center, zoom_start=12)
     marker_cluster = MarkerCluster().add_to(map_)
 
+    for _, row in data_frame.iterrows():
+        price = format_value(row["price"])
+        zestimate = format_value(row["zestimate"])
+        rent_zestimate = format_value(row["rentZestimate"])
+        gross_yield = format_value(row["gross_rental_yield"], "%")
+        bedrooms = int(row["bedrooms"]) if not pd.isna(row["bedrooms"]) else "N/A"
+        bathrooms = int(row["bathrooms"]) if not pd.isna(row["bathrooms"]) else "N/A"
+        living_area = int(row["livingArea"]) if not pd.isna(row["livingArea"]) else "N/A"
+
 
 @app.route("/price_history/<int:zpid>")
 @cache
