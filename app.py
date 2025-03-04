@@ -10,9 +10,8 @@ import pandas as pd
 
 import folium
 from folium.plugins import MarkerCluster
-from folium import MacroElement
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
