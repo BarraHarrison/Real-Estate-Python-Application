@@ -30,8 +30,16 @@ def load_and_preprocess_data(file_path="Zillow-Property-Listing-Info.csv"):
 
 data_frame = load_and_preprocess_data()
 
-def get_marker_color():
-    pass
+def get_marker_color(gross_yield, off_market):
+    if off_market:
+        return "black"
+    if pd.isna(gross_yield):
+        return "gray"
+    if gross_yield < 5:
+        return "red"
+    if gross_yield < 8:
+        return "orange"
+    return "green"
 
 def format_value():
     pass
