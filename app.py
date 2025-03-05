@@ -4,6 +4,9 @@ import json
 import time 
 from functools import cache 
 
+import webbrowser
+import threading
+
 import requests 
 import numpy as np 
 import pandas as pd 
@@ -151,4 +154,10 @@ def price_history(zpid):
     
 
 if __name__ == "__main__":
+    def open_browser():
+        time.sleep(1)
+        webbrowser.open("http://127.0.0.1:5000/")
+
+    threading.Thread(target=open_browser, daemon=True).start()
+
     app.run(debug=True)
