@@ -150,10 +150,10 @@ Replaced `.replace(inplace=True)` with `df["column"] = df["column"].replace(...)
 This **Real Estate Python Application** successfully integrates **Zillow property data** and **BrightData price history** into an **interactive real estate scouting tool** for **NYC properties**. 🏙️ I personally chose to use a dataset based on NYC Real Estate Properties because I used to live in NYC on 96th st. 🗽
 
 ### 🚀 **What This Project Offers:**
-✅ **Visualize NYC real estate on an interactive map**
-✅ **Explore property details like Zestimate, rent, and yield**
-✅ **Retrieve price history with a single click**
-✅ **A lightweight and efficient Flask-based app**
+✅ **Visualize NYC real estate on an interactive map**  
+✅ **Explore property details like Zestimate, rent, and yield**  
+✅ **Retrieve price history with a single click**  
+✅ **A lightweight and efficient Flask-based app**  
 
 This project provides **valuable insights for real estate investors** and serves as a great example of how **Python can be used in real estate analytics**. 🏡💰
 
