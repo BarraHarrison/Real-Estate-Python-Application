@@ -35,10 +35,10 @@ This allowed me to determine which features were most relevant. I focused on:
 
 ## 🚀 Why Use Flask for This Application?
 Flask was chosen for this project because:
-✅ **Lightweight & Easy to Use** – Perfect for a small web application.
-✅ **Supports Dynamic Content** – Allows interactive maps and API integration.
-✅ **Great for Prototyping** – Quickly develop and test features.
-✅ **Scalable** – Can be expanded into a full-stack real estate analytics tool.
+✅ **Lightweight & Easy to Use** – Perfect for a small web application.  
+✅ **Supports Dynamic Content** – Allows interactive maps and API integration.  
+✅ **Great for Prototyping** – Quickly develop and test features.  
+✅ **Scalable** – Can be expanded into a full-stack real estate analytics tool.  
 
 ---
 
@@ -125,9 +125,9 @@ def price_history(zpid):
 
 ## 🔧 How I Refactored the Code
 Originally, functions for **data preprocessing, visualization, and API requests** were **all in one function**. Refactoring involved:
-✅ **Splitting logic** into dedicated functions.
-✅ **Improving code readability & maintainability**.
-✅ **Eliminating redundant computations**.
+✅ **Splitting logic** into dedicated functions.  
+✅ **Improving code readability & maintainability**.  
+✅ **Eliminating redundant computations**.  
 
 ---
 
