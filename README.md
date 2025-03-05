@@ -34,7 +34,7 @@ This allowed me to determine which features were most relevant. I focused on:
 ---
 
 ## 🚀 Why Use Flask for This Application?
-Flask was chosen for this project because:
+Flask was chosen for this project because:  
 ✅ **Lightweight & Easy to Use** – Perfect for a small web application.  
 ✅ **Supports Dynamic Content** – Allows interactive maps and API integration.  
 ✅ **Great for Prototyping** – Quickly develop and test features.  
