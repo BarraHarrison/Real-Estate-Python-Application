@@ -124,7 +124,7 @@ def price_history(zpid):
 ---
 
 ## 🔧 How I Refactored the Code
-Originally, functions for **data preprocessing, visualization, and API requests** were **all in one function**. Refactoring involved:
+Originally, functions for **data preprocessing, visualization, and API requests** were **all in one function**. Refactoring involved:  
 ✅ **Splitting logic** into dedicated functions.  
 ✅ **Improving code readability & maintainability**.  
 ✅ **Eliminating redundant computations**.  
