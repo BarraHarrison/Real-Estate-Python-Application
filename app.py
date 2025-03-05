@@ -49,6 +49,12 @@ def format_value(value, prefix="$", decimals=2):
         return "N/A"
     return f"{prefix}{value:.{decimals}f}"
 
+def open_browser():
+    """Open the real estate app in the browser only once."""
+    if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+        time.sleep(1)
+        webbrowser.open("http://127.0.0.1:5000/")
+
 @app.route("/")
 def index():
     if os.path.exists("templates/property_map.html"):
@@ -151,13 +157,7 @@ def price_history(zpid):
 
     return render_template("price_history.html", price_history_data_frame=price_history_df)
 
-    
 
 if __name__ == "__main__":
-    def open_browser():
-        time.sleep(1)
-        webbrowser.open("http://127.0.0.1:5000/")
-
     threading.Thread(target=open_browser, daemon=True).start()
-
     app.run(debug=True)
